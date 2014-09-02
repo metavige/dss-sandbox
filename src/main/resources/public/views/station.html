@@ -1,0 +1,115 @@
+<div ng-controller="StationCtrl">
+	<form class="form-horizontal" role="form" ng-if="routes.current">
+		<div class="form-group">
+			<label for="routeId" class="col-sm-2 control-label">Route</label>
+			<div class="col-sm-4">
+				<input type="text" class="form-control" id="routeRoute"
+					placeholder="Route" ng-model="routes.current.routeId">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="routeName" class="col-sm-2 control-label">Route
+				Name</label>
+			<div class="col-sm-4">
+				<input type="text" class="form-control" id="routeName"
+					placeholder="Route Name" ng-model="routes.current.name">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="routeNote" class="col-sm-2 control-label">Note</label>
+			<div class="col-sm-4">
+				<input type="text" class="form-control" id="routeNote"
+					placeholder="Route Note" ng-model="routes.current.note">
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-sm-offset-2 col-sm-10">
+				<button type="submit" class="btn btn-sm btn-success"
+					ng-click="routes.save()">Save</button>
+				<button type="button" class="btn btn-sm btn-default"
+					ng-click="routes.set(null)">Cancel</button>
+			</div>
+		</div>
+	</form>
+
+	<table class="table table-striped table-bordered table-hover"
+		ng-table="routes.tableParams">
+		<caption class="text-left">
+			<button class="btn btn-sm btn-primary" ng-click="createRoute()"
+				ng-if="!routes.current">CREATE ROUTE</button>
+		</caption>
+		<tr ng-repeat="route in routes.dataStore" ng-click="editStations(route)">
+			<td style="width: 200px">
+				<button class="btn btn-sm btn-primary" ng-click="selectRoute(route)">
+					<span class="glyphicon glyphicon-edit"></span> EDIT
+				</button>
+				<button class="btn btn-sm btn-danger"
+					ng-click="routes.remove(route)">
+					<span class="glyphicon glyphicon-trash"></span> DEL
+				</button>
+			</td>
+			<td data-title="'Route'">{{route.route}}</td>
+			<td data-title="'Route Name'">{{route.name}}</td>
+			<td class="" data-title="'Note'">{{route.note}}</td>
+		</tr>
+	</table>
+
+	<div ng-if="stations">
+
+		<form class="form-horizontal" role="form" ng-if="stations.current">
+			<div class="form-group">
+				<label for="stationName" class="col-sm-2 control-label">Station
+					Name</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="stationName"
+						placeholder="Station Name" ng-model="stations.current.nameTw">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="stationNote" class="col-sm-2 control-label">Note</label>
+				<div class="col-sm-4">
+					<input type="text" class="form-control" id="stationNote"
+						placeholder="Station Note" ng-model="stations.current.note">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="stationSorting" class="col-sm-2 control-label">Sorting</label>
+				<div class="col-sm-4">
+					<input type="number" class="form-control" id="stationSorting"
+						placeholder="Station Sorting" ng-model="stations.current.sorting">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					<button type="submit" class="btn btn-sm btn-success"
+						ng-click="stations.save()">Save</button>
+					<button type="button" class="btn btn-sm btn-default"
+						ng-click="stations.set(null)">Cancel</button>
+				</div>
+			</div>
+		</form>
+
+		<table class="table table-striped table-hover"
+			ng-table="stations.tableParams">
+			<caption class="text-left">
+				<button class="btn btn-sm btn-primary" ng-click="createStation()"
+					ng-show="!stations.current">CREATE STATION</button>
+			</caption>
+			<tr ng-repeat="station in stations.dataStore">
+				<td style="width: 200px">
+					<button class="btn btn-sm btn-primary"
+						ng-click="selectStation(station)">
+						<span class="glyphicon glyphicon-edit"></span> EDIT
+					</button>
+					<button class="btn btn-sm btn-danger"
+						ng-click="stations.remove(station)">
+						<span class="glyphicon glyphicon-trash"></span> DEL
+					</button>
+				</td>
+				<td data-title="'Station Name'">{{station.nameTw}}</td>
+				<td class="" data-title="'Note'">{{station.note}}</td>
+				<td class="" data-title="'Sorting'">{{station.sorting}}</td>
+			</tr>
+		</table>
+	</div>
+</div>
